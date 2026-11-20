@@ -1,0 +1,19 @@
+{
+  "data": "2026-11-19T21:16:52.209122-03:00",
+  "escopo": [
+    "data/",
+    "notebooks/"
+  ],
+  "notebook": {
+    "celulas_codigo_executadas": 12,
+    "erros": 0,
+    "figuras_interativas": 4,
+    "independente_de_src_e_scripts": true,
+    "executado_sem_arquivos_brutos": true
+  },
+  "comparacao_com_entrega_validada": {
+    "csvs_identicos": true,
+    "quatro_figuras_identicas": true
+  },
+  "arquivos_existentes_do_grupo_alterados": []
+}
