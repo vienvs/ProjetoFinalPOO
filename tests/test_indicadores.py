@@ -69,7 +69,7 @@ def test_trajetoria_fecha_em_100_por_cento(catalogo, dados):
     for ano in range(2020, 2025):
         soma = sum(catalogo[c].valor_em(dados, ano) for c in
                    ['permanencia_coorte', 'conclusao_acumulada_coorte', 'desistencia_acumulada_coorte'])
-        assert soma == pytest.approx(100, abs=0.5), ano
+        assert soma == pytest.approx(100, abs=1e-8), ano
 
 
 def test_ausencia_na_trajetoria_nao_vira_zero(catalogo, dados):
