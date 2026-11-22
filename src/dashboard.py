@@ -1,34 +1,20 @@
-from pathlib import Path
-
 import pandas as pd
 import streamlit as st
 
 try:
+    from src.fontes import carregar_dados
     from src.indicadores import REDES, CatalogoIndicadores, formatar_decimal, formatar_inteiro
     from src.visualizacao import Visualizador
 except ModuleNotFoundError:
+    from fontes import carregar_dados
     from indicadores import REDES, CatalogoIndicadores, formatar_decimal, formatar_inteiro
     from visualizacao import Visualizador
 
-PASTA_PROCESSADOS = Path(__file__).resolve().parents[1] / 'data' / 'processed'
-ARQUIVOS = {'enem': 'enem_brasil_rede.csv',
-            'superior': 'superior_brasil.csv',
-            'trajetoria': 'trajetoria_coorte_2020.csv'}
 CODIGOS_TRAJETORIA = ['permanencia_coorte', 'conclusao_acumulada_coorte', 'desistencia_acumulada_coorte']
 
 LINK_ENEM = 'https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/enem'
 LINK_SUPERIOR = ('https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/'
                  'sinopses-estatisticas/educacao-superior')
-
-
-@st.cache_data(show_spinner=False)
-def _ler_csv(caminho):
-    return pd.read_csv(caminho, encoding='utf-8')
-
-
-def carregar_dados(pasta=PASTA_PROCESSADOS):
-    pasta = Path(pasta)
-    return {nome: _ler_csv(str(pasta / arquivo)) for nome, arquivo in ARQUIVOS.items()}
 
 
 class FiltrosDashboard:

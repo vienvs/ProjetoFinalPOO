@@ -30,8 +30,9 @@ def _total_inscritos(por_rede):
     return por_rede.sum(axis=1, min_count=len(REDES))
 
 
-def _variacao_percentual(serie):
-    anterior = serie.shift(1)
+def variacao_percentual(serie):
+    anterior = serie.reindex(serie.index - 1)
+    anterior.index = serie.index
     return (serie / anterior.where(anterior.ne(0)) - 1) * 100
 
 
@@ -178,7 +179,7 @@ class VariacaoAnualPublica(IndicadorPercentual):
 
     def _calcular(self, dados):
         publica = _inscritos_por_rede(dados['enem'])[REDE_PUBLICA]
-        return _como_serie_anual(_variacao_percentual(publica))
+        return _como_serie_anual(variacao_percentual(publica))
 
 
 class IngressantesGraduacao(IndicadorContagem):

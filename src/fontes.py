@@ -39,8 +39,6 @@ class FonteExcel(FonteDados):
         self._limite_linhas = limite_linhas
 
     def carregar(self):
-
-
         livro = load_workbook(self.caminho, read_only=True, data_only=True)
         try:
             if self._aba not in livro.sheetnames:
@@ -52,6 +50,17 @@ class FonteExcel(FonteDados):
 
 
 ROOT = Path(__file__).resolve().parent.parent
+
+
+PASTA_PROCESSADOS = ROOT / 'data' / 'processed'
+ARQUIVOS = {'enem': 'enem_brasil_rede.csv',
+            'superior': 'superior_brasil.csv',
+            'trajetoria': 'trajetoria_coorte_2020.csv'}
+
+
+def carregar_dados(pasta=PASTA_PROCESSADOS):
+    return {nome: FonteCSV(Path(pasta) / arquivo).carregar()
+            for nome, arquivo in ARQUIVOS.items()}
 
 
 PAGINA = 'https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/'
@@ -127,7 +136,8 @@ def localizar_planilha(fonte, baixar=False):
         fonte['membro_zip'] = nomes[0]
     with zip_path.open('rb') as entrada:
         fonte['sha256_zip'] = hashlib.file_digest(entrada, 'sha256').hexdigest()
-    fonte['sha256_xlsx'] = hashlib.sha256(planilha.read_bytes()).hexdigest()
+    with planilha.open('rb') as entrada:
+        fonte['sha256_xlsx'] = hashlib.file_digest(entrada, 'sha256').hexdigest()
     fonte['arquivo_zip'] = zip_path.relative_to(ROOT).as_posix()
     fonte['arquivo_xlsx'] = planilha.relative_to(ROOT).as_posix()
     fonte['data_arquivo_local'] = datetime.fromtimestamp(zip_path.stat().st_mtime).astimezone().isoformat()
