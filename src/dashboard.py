@@ -113,10 +113,10 @@ class Dashboard:
         st.subheader(f'Indicadores principais · {ano}')
         primeira = st.columns(4)
         self._metrica(primeira[0], 'Inscrições · rede pública', catalogo['inscritos_publica'], ano)
-        self._metrica(primeira[1], 'Participação pública', catalogo['participacao_publica_no_total_pct'], ano)
+        self._metrica(primeira[1], 'Rede pública entre os concluintes inscritos', catalogo['participacao_publica_no_total_pct'], ano)
         self._metrica(primeira[2], 'Sem informação da rede', catalogo['sem_informacao_pct'], ano)
         self._metrica(primeira[3], 'Ingressantes na graduação', catalogo['ingressantes_graduacao'], ano)
-        st.caption(f'Coorte de ingressantes de 2020 · % dos vínculos com os cursos de ingresso, até {ano}')
+        st.caption(f'Coorte de ingressantes de 2020 · situação em {ano}, descontados os falecimentos acumulados')
         segunda = st.columns(3)
         self._metrica(segunda[0], 'Permanência', catalogo['permanencia_coorte'], ano)
         self._metrica(segunda[1], 'Conclusão acumulada', catalogo['conclusao_acumulada_coorte'], ano)
@@ -199,7 +199,7 @@ class Dashboard:
              f'{self._evolucao(catalogo["ingressantes_graduacao"], filtros)}. Esse total não identifica quem '
              'entrou pelo Enem; por isso o gráfico de dispersão compara séries agregadas e não indica relação '
              'de causa e efeito.'),
-            (f'**Coorte de 2020.** Até {fim}, entre os vínculos dos ingressantes de 2020, {permanencia}% seguiam '
+            (f'**Coorte de 2020.** Até {fim}, descontados os falecimentos acumulados, {permanencia}% dos vínculos seguiam '
              f'em permanência, {conclusao}% concluíram o curso e {desistencia}% desistiram do curso de ingresso. '
              'Desistir do curso não é o mesmo que deixar o ensino superior, e cinco anos de acompanhamento não '
              'se comparam a coortes com dez anos.'),

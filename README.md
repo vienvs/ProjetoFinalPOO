@@ -2,6 +2,8 @@
 
 Como evoluíram as inscrições de concluintes da rede pública no Enem entre 2020 e 2024? O projeto compara as redes de origem dos inscritos no Brasil e apresenta, no mesmo período, os ingressos na graduação e a trajetória dos estudantes que iniciaram um curso superior em 2020.
 
+[Consultar a documentação e os gráficos](https://vienvs.github.io/ProjetoFinalPOO/)
+
 ## 📊 O que os números mostram
 
 | Série do Inep | O que a tabela permite acompanhar |
@@ -48,4 +50,4 @@ Para refazer a extração a partir dos ZIPs locais em `data/raw/`, execute o scr
 ## Hospedagem
 
 - **Painel:** no Streamlit Community Cloud, aponte para este repositório, escolha `app.py` como arquivo principal e Python 3.12 nas configurações avançadas. As tabelas de `data/processed/` já estão versionadas, então nada precisa ser baixado.
-- **Documentação:** no GitHub, abra *Settings → Pages* e publique a pasta `/docs` da branch `main`.
+- **Documentação:** o GitHub Pages publica os arquivos de `docs/` da branch `main`.

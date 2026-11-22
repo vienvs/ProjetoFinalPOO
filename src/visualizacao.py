@@ -9,7 +9,7 @@ CORES_TRAJETORIA = {'permanencia_coorte': '#2563b0',
                     'desistencia_acumulada_coorte': '#b85c5c'}
 
 AVISO_ENEM = ('Rede registrada na sinopse; sem informação preservada. '
-              '2024 tem forte mudança de cobertura da categoria privada.')
+              'Em 2024, 48% das inscrições de concluintes ficaram sem rede informada.')
 AVISO_TRAJETORIA = ('Vínculos com cursos, não pessoas únicas. A coorte de 2020 tem cinco anos de '
                     'acompanhamento e não se compara diretamente a coortes com dez anos.')
 
@@ -102,8 +102,8 @@ class GraficoBarras(Grafico):
             titulo='Inscrições por rede registrada',
             subtitulo='Brasil · {periodo} · barras não representam taxas de acesso',
             fonte='Fonte: Inep, Sinopses do Enem, tabela 3.10.',
-            comentario=('São números absolutos, não probabilidades de acesso. Uma queda acentuada de uma '
-                        'categoria pode refletir mudança de cobertura da fonte, e não queda real de participação.'))
+            comentario=('As barras contam as inscrições conforme a rede registrada. Em 2024, 519 aparecem '
+                        'na categoria privada e 775.870 ficaram sem rede informada.'))
 
     def _desenhar(self, dados, **opcoes):
         enem = dados['enem'].sort_values('ano')

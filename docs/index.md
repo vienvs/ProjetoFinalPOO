@@ -8,8 +8,8 @@ title: Do Enem à graduação
 Sistema em Python que lê dados oficiais do Inep, trata as tabelas com Pandas, calcula indicadores em classes
 orientadas a objetos e apresenta os resultados em gráficos Plotly e num painel Streamlit.
 
-- Código-fonte e instruções de execução: `README.md` na raiz do repositório.
-- Painel interativo: `streamlit run app.py`. O GitHub Pages hospeda apenas esta documentação estática, então o painel precisa ser publicado à parte, por exemplo no Streamlit Community Cloud.
+- [Código-fonte e instruções para executar o painel](https://github.com/vienvs/ProjetoFinalPOO#readme).
+- Painel interativo: `streamlit run app.py`. Para abrir o painel no computador, siga os comandos no README. Os cinco gráficos também estão disponíveis nesta página.
 
 ---
 
@@ -21,7 +21,9 @@ O MEC estimou que a parcela de concluintes da rede pública inscritos no Enem pa
 concluintes da rede estadual de 2023 se matricularam na graduação em 2024, contra 60% da rede privada.
 Esse contraste entre **participar do exame**, **ingressar** e **concluir** motiva o projeto.
 
-**Hipótese (não conclusão):** o aumento da presença da rede pública no Enem pode não se refletir, na mesma
+Os **94%** estimados pelo MEC usam como base os concluintes da rede pública. Já os **52%** calculados neste projeto usam como base todos os concluintes inscritos no Enem de 2024, inclusive os que ficaram sem rede informada.
+
+**Hipótese:** o aumento das inscrições de concluintes da rede pública no Enem pode não se refletir, na mesma
 intensidade, no ingresso e na conclusão do ensino superior.
 
 **Perguntas orientadoras**
@@ -160,7 +162,7 @@ e crescem nas edições seguintes. O gráfico sozinho não explica as causas das
 <iframe src="graficos/01_linhas.html" width="100%" height="600" loading="lazy" title="Gráfico de linhas"></iframe>
 
 **Barras: comparação absoluta entre redes.** As barras mostram números absolutos, não probabilidades de acesso.
-A queda da rede privada em 2024 (519 inscrições) indica uma mudança na cobertura da fonte, e não uma queda real.
+Em 2024, a sinopse registra 519 inscrições na categoria privada e 775.870 sem rede informada. A causa dessa distribuição permanece em aberto.
 
 <iframe src="graficos/02_barras.html" width="100%" height="600" loading="lazy" title="Gráfico de barras"></iframe>
 
@@ -197,10 +199,10 @@ As tabelas processadas ficam no repositório, então o painel roda sem baixar os
 **Conclusões**
 
 - As inscrições de concluintes da rede pública no Enem passaram de **685.864 (2020)** para **841.213 (2024)**, alta de 22,7%, apesar da queda de 12,1% em 2021.
-- Entre os inscritos, a rede pública responde por cerca de **52%** desde 2021. Em 2024, porém, **48%** dos registros não informam a rede.
+- Entre os concluintes inscritos, a parcela identificada como da rede pública variou de **52,0% a 55,0%** entre 2021 e 2024. Em 2024, porém, **48%** dos registros não informam a rede.
 - Os ingressos na graduação, de todas as origens, subiram de 3,77 milhões para **5,01 milhões** (+33,1%).
-- Dos vínculos dos ingressantes de 2020, até 2024 **24,4% concluíram**, **62,1% desistiram** do curso de ingresso e **13,6% permaneciam**.
-- Há evidência de maior participação pública no Enem e de alta desistência dos cursos. **Não está comprovado** que mais estudantes da rede pública ingressaram pelo Enem e concluíram a graduação: isso exigiria dados que liguem as mesmas pessoas entre as etapas.
+- Na coorte de 2020, descontados os falecimentos acumulados até 2024, **24,4% concluíram**, **62,1% desistiram** do curso de ingresso e **13,6% permaneciam**.
+- A contagem de inscrições da rede pública cresceu entre 2020 e 2024. Na coorte da graduação, a desistência do curso foi o desfecho mais frequente até 2024. **Não está comprovado** que mais estudantes da rede pública ingressaram pelo Enem e concluíram a graduação: isso exigiria dados que liguem as mesmas pessoas entre as etapas.
 
 **Limitações**
 
@@ -217,7 +219,7 @@ As tabelas processadas ficam no repositório, então o painel roda sem baixar os
 - INEP. Sinopses Estatísticas da Educação Superior 2020–2024. <https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-superior>
 - INEP. Sinopses Estatísticas da Educação Básica 2020–2024. <https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica>
 - INEP. Indicadores de Trajetória da Educação Superior 2020–2024. <https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/indicadores-de-trajetoria-da-educacao-superior>
-- MEC/INEP. Panorama Brasil: Enem, novembro de 2024; Censo da Educação Superior 2024, divulgação de resultados.
+- MEC/Inep. [Panorama Brasil, Enem de novembro de 2024](https://www.gov.br/mecconfia/pt-br/centrais-de-conteudo/infograficos/enem/bra-nov-24-pdf.pdf) e [resultados do Censo da Educação Superior 2024](https://download.inep.gov.br/educacao_superior/censo_superior/documentos/2024/apresentacao_censo_da_educacao_superior_2024.pdf).
 - Pandas: <https://pandas.pydata.org> · Plotly: <https://plotly.com/python/> · Streamlit: <https://docs.streamlit.io>
 
 Arquivos do Inep processados em 19/11/2026 (datas e hashes em `data/processed/fontes.json`).
