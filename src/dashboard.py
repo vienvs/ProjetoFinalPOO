@@ -1,7 +1,11 @@
+import sys
+from pathlib import Path
+
 import pandas as pd
 import streamlit as st
 
 try:
+    from src.analise import AnalisadorColeta
     from src.fontes import carregar_dados
     from src.indicadores import REDES, CatalogoIndicadores, formatar_decimal, formatar_inteiro
     from src.visualizacao import Visualizador
@@ -9,6 +13,8 @@ except ModuleNotFoundError:
     from fontes import carregar_dados
     from indicadores import REDES, CatalogoIndicadores, formatar_decimal, formatar_inteiro
     from visualizacao import Visualizador
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # analise.py importa src.indicadores
+    from src.analise import AnalisadorColeta
 
 CODIGOS_TRAJETORIA = ['permanencia_coorte', 'conclusao_acumulada_coorte', 'desistencia_acumulada_coorte']
 
@@ -145,9 +151,11 @@ class Dashboard:
 
     def _tabela(self, filtros):
         st.subheader('Tabela de dados')
+        enem_filtrado = filtros.filtrar_redes(filtros.filtrar_anos(self._dados['enem']))
         tabelas = {
             'Indicadores calculados': self._tabela_indicadores(filtros),
-            'Inscrições no Enem por rede': filtros.filtrar_redes(filtros.filtrar_anos(self._dados['enem'])),
+            'Estatísticas descritivas das inscrições': AnalisadorColeta(enem_filtrado).estatisticas(),
+            'Inscrições no Enem por rede': enem_filtrado,
             'Ingressantes na graduação': filtros.filtrar_anos(self._dados['superior']),
             'Trajetória da coorte 2020': filtros.filtrar_anos(self._dados['trajetoria'], 'ano_referencia'),
         }

@@ -1,5 +1,8 @@
 from src.indicadores import REDES, variacao_percentual
 
+NOMES_ESTATISTICAS = {'count': 'edicoes', 'mean': 'media', 'std': 'desvio_padrao', 'min': 'minimo',
+                      '25%': 'quartil_1', '50%': 'mediana', '75%': 'quartil_3', 'max': 'maximo'}
+
 
 class AnalisadorColeta:
     def __init__(self, enem):
@@ -19,3 +22,10 @@ class AnalisadorColeta:
                  'total_concluintes_inscritos', 'participacao_publica_no_total_pct',
                  'sem_informacao_pct', 'variacao_anual_publica_pct']
         return tabela[ordem].sort_index().reset_index().rename_axis(None, axis=1)
+
+    def estatisticas(self):
+        """Estatísticas descritivas das inscrições de cada rede ao longo das edições."""
+        tabela = self._enem.groupby('rede_origem')['inscritos_concluintes'].describe()
+        tabela = tabela.reindex([rede for rede in REDES if rede in tabela.index])
+        tabela['coef_variacao_pct'] = tabela['std'] / tabela['mean'] * 100
+        return tabela.rename(columns=NOMES_ESTATISTICAS).rename_axis('rede_origem').reset_index()
