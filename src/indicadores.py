@@ -200,8 +200,9 @@ class IngressantesGraduacao(IndicadorContagem):
 class IndicadorTrajetoria(IndicadorPercentual):
     def _calcular(self, dados):
         trajetoria = dados['trajetoria'].sort_values('ano_referencia').set_index('ano_referencia')
-        base = trajetoria['vinculos_ingressantes_coorte']
-        return _como_serie_anual(self._numerador(trajetoria) / base.where(base.ne(0)) * 100)
+        falecimentos = trajetoria['falecimentos_no_ano'].cumsum(skipna=False)
+        base = trajetoria['vinculos_ingressantes_coorte'] - falecimentos
+        return _como_serie_anual(self._numerador(trajetoria) / base.where(base.gt(0)) * 100)
 
     @abstractmethod
     def _numerador(self, trajetoria):
@@ -218,7 +219,7 @@ class PermanenciaCoorte(IndicadorTrajetoria):
             codigo='permanencia_coorte',
             nome='Permanência da coorte 2020',
             descricao='Vínculos da coorte de 2020 ainda ativos no curso de ingresso.',
-            formula='Vínculos em permanência no ano ÷ vínculos dos ingressantes de 2020 × 100.',
+            formula='Vínculos em permanência no ano ÷ (vínculos iniciais − falecimentos acumulados) × 100.',
             limitacao=LIMITE_TRAJETORIA)
 
     def _numerador(self, trajetoria):
@@ -231,7 +232,7 @@ class ConclusaoAcumuladaCoorte(IndicadorTrajetoria):
             codigo='conclusao_acumulada_coorte',
             nome='Conclusão acumulada da coorte 2020',
             descricao='Parte da coorte de 2020 que concluiu o curso de ingresso até o ano de referência.',
-            formula='Soma das conclusões anuais até o ano ÷ vínculos dos ingressantes de 2020 × 100.',
+            formula='Soma das conclusões anuais até o ano ÷ (vínculos iniciais − falecimentos acumulados) × 100.',
             limitacao=LIMITE_TRAJETORIA)
 
     def _numerador(self, trajetoria):
@@ -244,7 +245,7 @@ class DesistenciaAcumuladaCoorte(IndicadorTrajetoria):
             codigo='desistencia_acumulada_coorte',
             nome='Desistência acumulada da coorte 2020',
             descricao='Parte da coorte de 2020 que desistiu do curso de ingresso até o ano de referência.',
-            formula='Soma das desistências anuais até o ano ÷ vínculos dos ingressantes de 2020 × 100.',
+            formula='Soma das desistências anuais até o ano ÷ (vínculos iniciais − falecimentos acumulados) × 100.',
             limitacao=('Desistência do curso não significa saída do ensino superior. ' + LIMITE_TRAJETORIA))
 
     def _numerador(self, trajetoria):
