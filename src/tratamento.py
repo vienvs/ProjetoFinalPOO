@@ -156,11 +156,10 @@ def tabela_trajetoria(arquivo):
     return soma, amostra, perfil
 
 
-def preparar(baixar=False):
+def preparar(baixar=False, saida=ROOT / 'data/processed'):
     fontes = fontes_oficiais()
     extrator = ExtratorSinopse()
     registros = {'enem': [], 'superior': [], 'basica': []}
-    saida = ROOT/'data/processed'
     saida.mkdir(parents=True, exist_ok=True)
     for fonte in fontes:
         print('Processando', fonte['id'], flush=True)
@@ -189,4 +188,3 @@ def preparar(baixar=False):
     (saida/'fontes.json').write_text(json.dumps(fontes, ensure_ascii=False, indent=2), encoding='utf-8')
     (saida/'evidencias_extracao.json').write_text(
         json.dumps(extrator.evidencias, ensure_ascii=False, indent=2), encoding='utf-8')
-    print('Pronto: tabelas nacionais e evidências em dados/processed.', flush=True)
