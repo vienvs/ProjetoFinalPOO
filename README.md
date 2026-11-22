@@ -43,9 +43,9 @@ Para refazer a extração a partir dos ZIPs locais em `data/raw/`, execute o scr
 | `src/visualizacao.py` e `src/dashboard.py` | Figuras Plotly e painel Streamlit |
 | `tests/` | Testes dos dados e dos cálculos |
 
-## Prévia do painel
+## Integração com o Streamlit
 
-O comando Streamlit acima abre a prévia completa no navegador. O ponto de entrada para o futuro `app.py` é `main()` em `src.dashboard`. Ele lê três CSVs locais (Enem, graduação e trajetória), monta o catálogo de indicadores e abre o painel.
+O ponto de entrada para o futuro `app.py` é `main()` em `src.dashboard`. Ele lê três CSVs locais (Enem, graduação e trajetória), monta o catálogo de indicadores e abre o painel.
 
 ~~~python
 from src.dashboard import main

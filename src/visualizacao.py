@@ -9,7 +9,7 @@ CORES_TRAJETORIA = {'permanencia_coorte': '#2563b0',
                     'desistencia_acumulada_coorte': '#b85c5c'}
 
 AVISO_ENEM = ('Rede registrada na sinopse; sem informação preservada. '
-              'Em 2024, quase metade dos registros está sem rede informada.')
+              '2024 tem forte mudança de cobertura da categoria privada.')
 AVISO_TRAJETORIA = ('Vínculos com cursos, não pessoas únicas. A coorte de 2020 tem cinco anos de '
                     'acompanhamento e não se compara diretamente a coortes com dez anos.')
 
@@ -183,7 +183,7 @@ class GraficoTrajetoria(Grafico):
             titulo='Trajetória da coorte de ingressantes de 2020',
             subtitulo='Brasil · {periodo} · % dos vínculos dos ingressantes de 2020 no curso de ingresso',
             fonte='Fonte: Inep, Indicadores de Trajetória da Educação Superior (coorte 2020).',
-            comentario=('A base exclui os falecimentos acumulados desde o ingresso em 2020. Desistência é do curso '
+            comentario=('Os percentuais usam como base os vínculos dos ingressantes de 2020. Desistência é do curso '
                         'de ingresso, não saída do ensino superior. Cinco anos de acompanhamento não se comparam '
                         'a coortes com dez anos.'),
             aviso=AVISO_TRAJETORIA)
