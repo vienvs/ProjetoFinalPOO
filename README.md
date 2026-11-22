@@ -24,7 +24,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe scripts/preparar_dados.py
 .\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m streamlit run src/dashboard.py
+.\.venv\Scripts\python.exe -m streamlit run app.py
 ~~~
 
 O script usa os CSVs já versionados, confere os totais e as cinco edições, calcula os oito indicadores e grava o resumo anual do Enem. O painel oferece filtros por período e rede, gráficos interativos e exportação da tabela selecionada.
@@ -42,13 +42,10 @@ Para refazer a extração a partir dos ZIPs locais em `data/raw/`, execute o scr
 | `data/processed/` | Tabelas, dicionário, fontes e evidências da extração |
 | `src/visualizacao.py` e `src/dashboard.py` | Figuras Plotly e painel Streamlit |
 | `tests/` | Testes dos dados e dos cálculos |
+| `app.py` | Ponto de entrada do painel (`streamlit run app.py`) |
+| `docs/` | Documentação do projeto para o GitHub Pages |
 
-## Integração com o Streamlit
+## Hospedagem
 
-O ponto de entrada para o futuro `app.py` é `main()` em `src.dashboard`. Ele lê três CSVs locais (Enem, graduação e trajetória), monta o catálogo de indicadores e abre o painel.
-
-~~~python
-from src.dashboard import main
-
-main()
-~~~
+- **Painel:** no Streamlit Community Cloud, aponte para este repositório, escolha `app.py` como arquivo principal e Python 3.12 nas configurações avançadas. As tabelas de `data/processed/` já estão versionadas, então nada precisa ser baixado.
+- **Documentação:** no GitHub, abra *Settings → Pages* e publique a pasta `/docs` da branch `main`.

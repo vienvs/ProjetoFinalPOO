@@ -81,6 +81,16 @@ class TestAnaliseColeta(unittest.TestCase):
         AnalisadorColeta(self.enem).resumo()
         pd.testing.assert_frame_equal(self.enem, copia)
 
+    def test_estatisticas_descritivas_por_rede(self):
+        estat = AnalisadorColeta(self.enem).estatisticas().set_index('rede_origem')
+        self.assertEqual(list(estat.index), ['Pública', 'Privada', 'Não dispõe da informação'])
+        publica = estat.loc['Pública']
+        self.assertEqual(publica['edicoes'], 5)
+        self.assertAlmostEqual(publica['media'], 716703.8)
+        self.assertEqual(publica['mediana'], 724523)
+        self.assertEqual((publica['minimo'], publica['maximo']), (603041, 841213))
+        self.assertAlmostEqual(publica['coef_variacao_pct'], publica['desvio_padrao'] / publica['media'] * 100)
+
 
 class TestExtratorEnem(unittest.TestCase):
     def test_linha_brasil_2020(self):
